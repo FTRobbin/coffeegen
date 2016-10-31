@@ -12,5 +12,6 @@ echo generating CoffeeScript
 echo compiling to JavaScript
 ./dataset/compileall.sh $all
 echo merging scripts
+rm -f processed/*.txt
 ./processed/merge $train $val $eval
 echo finished
