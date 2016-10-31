@@ -1,3 +1,4 @@
+#include<set>
 #include<vector>
 #include<cstdio>
 #include<cstring>
@@ -30,10 +31,33 @@ void genInteger() {
 const char* CH = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$0123456789";
 const int FIRST = 54, ALL = 64;
 
+set<string> dict;
+
+void initDict() {
+	FILE* dfile = fopen("generator/reserved.txt", "r");
+	char buf[20];
+	while (fscanf(dfile, "%s", buf) == 1) {
+		dict.insert(buf);
+	}
+	fclose(dfile);
+}
+
+bool isReserved(char *token) {
+	return dict.count(token) == 1;
+}
+
 void genIdentifier() {
 	int len = rand() % MAXIL + 1;	
+	char buf[MAXIL + 5];
 	for (int i = 0; i < len; ++i) {
-		fprintf(out, "%c", CH[rand() % (i ? ALL : FIRST)]);
+		buf[i] = CH[rand() % (i ? ALL : FIRST)];
+		//fprintf(out, "%c", CH[rand() % (i ? ALL : FIRST)]);
+	}
+	buf[len] = 0;
+	if (isReserved(buf)) {
+		genIdentifier();
+	} else {
+		fprintf(out, "%s", buf);
 	}
 }
 
@@ -103,6 +127,7 @@ void genProgram() {
 }
 
 int main(int narg, char* args[]) {
+	initDict();
 	int n;
 	sscanf(args[1], "%d", &n);
 	srand(SEED);
