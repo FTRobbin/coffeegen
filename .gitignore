@@ -1,0 +1,5 @@
+dataset/*.js
+dataset/*.coffee
+generator/gen
+processed/merge
+processed/*.txt

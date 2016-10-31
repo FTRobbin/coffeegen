@@ -109,7 +109,7 @@ int main(int narg, char* args[]) {
 	for (int i = 1; i <= n; ++i) {
 		char filename[30];
 		sprintf(filename, "%s%d.coffee", PATH, i);
-		printf("%d of %d : %s\n", i, NUMP, filename);
+		//printf("%d of %d : %s\n", i, NUMP, filename);
 		out = fopen(filename, "w");
 		genProgram();
 		fclose(out);

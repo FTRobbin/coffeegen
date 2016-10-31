@@ -13,14 +13,17 @@ A simple generator of simple CoffeeScript code.
 
 `/generator` : The generator in C++
 
+`/processed` : The merger in C++
+
 `run.sh` : Bash script to generate the dataset
 
 `/dataset/compileall.sh` : Bash script to compile all .coffee files to .js files.
 
 ## Usage
 
-1. Compile `/generator/gen.cpp`
+1. Compile `/generator/gen.cpp`, `/processed/merge.cpp`
 2. Modify `run.sh` to set the dataset size and run it
+3. `/processed/[train|val|eval]_[input|output].txt` shall be generated as the dataset
 
 ---
 
