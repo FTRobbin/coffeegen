@@ -1,3 +1,4 @@
+NaN
 case
 default
 function

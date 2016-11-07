@@ -1,3 +1,0 @@
-var Bpr;
-
-Bpr = true;

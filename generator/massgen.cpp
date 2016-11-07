@@ -132,12 +132,14 @@ int main(int narg, char* args[]) {
 	sscanf(args[1], "%d", &n);
 	srand(SEED);
 	for (int i = 1; i <= n; ++i) {
-		char filename[30];
-		sprintf(filename, "%s%d.coffee", PATH, i);
-		//printf("%d of %d : %s\n", i, NUMP, filename);
-		out = fopen(filename, "w");
-		genProgram();
-		fclose(out);
+		for (int j = 1; j <= 1000; ++j) {
+			char filename[30];
+			sprintf(filename, "%s%d/%d.coffee", PATH, i, j);
+			//printf("%d of %d : %s\n", i, NUMP, filename);
+			out = fopen(filename, "w");
+			genProgram();
+			fclose(out);
+		}
 	}
 	return 0;
 }

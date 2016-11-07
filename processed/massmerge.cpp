@@ -14,27 +14,30 @@ void merge(const char* path, const char* ext, int start, int end, const char* fn
 	char buf[1000000];
 	int maxLen = 0;
 	for (int i = start; i <= end; ++i) {
-		char pname[100];
-		sprintf(pname, "%s%d%s", path, i, ext);
-		FILE* input = fopen(pname, "r");
-		fread(buf, 1, 1000000, input);
-		int l = strlen(buf);
-		token += l;
-		maxLen = max(maxLen, l);
-		for (int j = 0; j < l; ++j) {
-			if (j) {
-				fprintf(output, " ");
+		for (int j = 1; j <= 1000; ++j) {
+			char pname[100];
+			sprintf(pname, "%s%d/%d%s", path, i, j, ext);
+			FILE* input = fopen(pname, "r");
+			fread(buf, 1, 1000000, input);
+			fclose(input);
+			int l = strlen(buf);
+			token += l;
+			maxLen = max(maxLen, l);
+			for (int k = 0; k < l; ++k) {
+				if (k) {
+					fprintf(output, " ");
+				}
+				if (buf[k] == ' ') {
+					fprintf(output, "_SPACE_");
+				} else if (buf[k] == '\n') {
+					fprintf(output, "_EOLN_");
+				} else {
+					fprintf(output, "%c", buf[k]);
+				}
+				buf[k] = '\0';
 			}
-			if (buf[j] == ' ') {
-				fprintf(output, "_SPACE_");
-			} else if (buf[j] == '\n') {
-				fprintf(output, "_EOLN_");
-			} else {
-				fprintf(output, "%c", buf[j]);
-			}
-			buf[j] = '\0';
+			fprintf(output, "\n");
 		}
-		fprintf(output, "\n");
 	}
 	fclose(output);
 	printf("%s #token: %d  maxLen: %d\n", fname, token, maxLen);

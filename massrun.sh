@@ -1,19 +1,18 @@
-train=${1:-1000}
+train=${1:-10}
 val=${2:-0}
-eval=${3:-100}
+eval=${3:-1}
 let "all=train+val+eval"
 echo all $all
 echo train $train val $val eval $eval
 echo cleaning up
-find dataset/ -name '*.coffee' -exec rm {} +
-rm -f dataset/*.js
+./dataset/clean.sh $all
 echo generating CoffeeScript
-./generator/gen $all
+./generator/massgen $all
 echo compiling to JavaScript
-./dataset/compileall.sh $all
+./dataset/masscompileall.sh $all
 echo merging scripts
 rm -f processed/*.txt
-./processed/merge $train $val $eval
+./processed/massmerge $train $val $eval
 echo finished
 #find dataset/ -name '*.coffee' -exec rm {} +
 #rm -f dataset/*.js
