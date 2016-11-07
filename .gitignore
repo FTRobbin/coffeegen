@@ -1,5 +1,7 @@
 dataset/*.js
 dataset/*.coffee
 generator/gen
+generator/massgen
 processed/merge
+processed/massmerge
 processed/*.txt
